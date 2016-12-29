@@ -19,7 +19,7 @@ module.exports = function () {
           // IMPORTANT: dev middleware can't access config, so we should
           // provide publicPath by ourselves
           publicPath: webpackConf.output.publicPath,
-
+          stats: {colors: true},
           // Quiet verbose output in console
           quiet: true
         }),

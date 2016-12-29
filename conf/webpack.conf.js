@@ -18,7 +18,7 @@ module.exports = {
       {
         test: /.js$/,
         exclude: /node_modules/,
-        loader: 'eslint-loader',
+        loader: 'eslint-loader?{rules:{semi:0}}',
         enforce: 'pre'
       },
       {
@@ -42,12 +42,12 @@ module.exports = {
   },
   plugins: [
     new webpack.optimize.OccurrenceOrderPlugin(),
+    new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
     FailPlugin,
     new HtmlWebpackPlugin({
       template: conf.path.src('index.html')
     }),
-    new webpack.HotModuleReplacementPlugin(),
     new webpack.LoaderOptionsPlugin({
       options: {
         postcss: () => [autoprefixer]

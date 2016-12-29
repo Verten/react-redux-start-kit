@@ -3,7 +3,7 @@
  */
 'use strict'
 import 'isomorphic-fetch'
-import jwt_decode from 'jwt-decode'
+import jwtDecode from 'jwt-decode'
 import {ID_TOKEN} from '../constants/TokenTypes'
 
 export function checkStatus(response) {
@@ -36,16 +36,16 @@ export function callAPI(url, config, request, onRequestSuccess, onRequestFailure
     return fetch(url, config)
       .then(checkStatus)
       .then(parseJSON)
-      .then((json) => {
+      .then(json => {
         dispatch(onRequestSuccess(json))
-      }).catch((error) => {
+      }).catch(error => {
         const response = error.response
         if (response === undefined) {
           dispatch(onRequestFailure(error))
         } else {
           error.status = response.status
           error.statusText = response.statusText
-          response.text().then((text) => {
+          response.text().then(text => {
             try {
               const json = JSON.parse(text)
               error.message = json.message
@@ -73,7 +73,7 @@ export function loadIdToken() {
 
 export function decodeUserProfile(idToken) {
   try {
-    return jwt_decode(idToken)
+    return jwtDecode(idToken)
   } catch (err) {
     return null
   }
@@ -82,7 +82,7 @@ export function decodeUserProfile(idToken) {
 export function loadUserProfile() {
   try {
     const idToken = sessionStorage.getItem(ID_TOKEN)
-    const userProfile = jwt_decode(idToken)
+    const userProfile = jwtDecode(idToken)
     const now = new Date().getTime() / 1000   // Date().getTime() returns milliseconds.
     // So divide by 1000 to get seconds
     if (now > userProfile.exp) {
