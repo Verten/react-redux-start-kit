@@ -9,6 +9,7 @@ import configureStore from './app/store/configureStore'
 import {Router, Route, browserHistory} from 'react-router'
 
 import 'todomvc-app-css/index.css'
+import 'antd/dist/antd.less'
 
 const store = configureStore()
 
