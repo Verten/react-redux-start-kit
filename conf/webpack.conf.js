@@ -59,7 +59,10 @@ module.exports = {
     }),
     new webpack.LoaderOptionsPlugin({
       options: {
-        postcss: () => [autoprefixer]
+        postcss: () => [autoprefixer],
+        eslint: {
+          configFile: './.eslintrc'
+        }
       },
       debug: true
     })
