@@ -22,9 +22,7 @@ class UserList extends React.Component {
     }
   }
 
-  componentDidMount() {
-
-  }
+  componentDidMount() {}
 
   componentWillMount() {
 
